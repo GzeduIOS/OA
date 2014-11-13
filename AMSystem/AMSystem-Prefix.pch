@@ -1,0 +1,28 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+// 如果处于调试状态  [file release];
+#ifdef DEBUG
+//#define MyLog(...) NSLog(__VA_ARGS__)
+#define MyLog(fmt, ...) {                                       \
+NSString* file = [[NSString alloc] initWithFormat:@"%s", __FILE__];  \
+NSLog((@"%@:%d > " fmt), [file lastPathComponent], __LINE__, ##__VA_ARGS__);             \
+}
+#else // 发布打包
+#define MyLog(...)
+#endif
