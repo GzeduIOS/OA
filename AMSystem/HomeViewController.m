@@ -27,11 +27,16 @@
 //发送跳转前预处理
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
    
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] init];
+    backBarButtonItem.title = @"";
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationItem.backBarButtonItem = backBarButtonItem;
+    
     if ([segue.identifier isEqualToString:@"LeaveSegue"]) {//请假申请单
         LeaveAndApproveViewController *leaveVC = segue.destinationViewController;
         leaveVC.userInfoDictionary = self.Dic;
         leaveVC.segueId = segue.identifier;
-        
+ 
     }else if([segue.identifier isEqualToString:@"LeaveApprovalSegue"]){//请假审核
         LeaveAndApproveViewController *leaveApprovalVC = segue.destinationViewController;
         leaveApprovalVC.userInfoDictionary = self.Dic;
@@ -57,6 +62,8 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"考勤管理";
+    self.navigationItem.hidesBackButton = YES;
+    
     //按钮圆角化
     self.Btn.layer.cornerRadius = 5;
     self.Btn2.layer.cornerRadius = 5;

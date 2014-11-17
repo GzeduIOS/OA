@@ -45,6 +45,7 @@
 {
     [super viewDidLoad];
     self.arrImage = [[NSMutableArray alloc]init];
+    self.title = @"考勤签到";
     
     //Location API init
     self.locationManager = [[CLLocationManager alloc] init];
