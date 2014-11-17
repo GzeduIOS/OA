@@ -29,6 +29,39 @@
     self.myName.text = [userDefaults stringForKey:@"name"];
     self.loginBtn.layer.cornerRadius = 5;
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self initStatusBar];
+    [self initUI];
+}
+
+-(void)initStatusBar{
+    //设置状态栏为跟随bar字体颜色
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    //设置bar背景颜色
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:38/255.0f green:109/255.0f blue:191/255.0f alpha:1.0f];
+    //设置bar字体颜色
+    self.navigationController.navigationBar.titleTextAttributes =[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    self.view.backgroundColor = [UIColor colorWithRed:241/255.0f green:241/255.0f blue:241/255.0f alpha:1.0f];
+}
+
+-(void)initUI{
+    UIView *userNameView = [self.view viewWithTag:1];
+    userNameView.layer.cornerRadius = 5;
+    userNameView.backgroundColor = [UIColor whiteColor];
+    userNameView.layer.borderWidth = 1;
+    userNameView.layer.borderColor = [[UIColor colorWithRed:224/255.0f green:224/255.0f blue:224/255.0f alpha:1.0f]CGColor];
+    
+    UIView *passNameView = [self.view viewWithTag:2];
+    passNameView.layer.cornerRadius = 5;
+    passNameView.backgroundColor = [UIColor whiteColor];
+    passNameView.layer.borderWidth = 1;
+    passNameView.layer.borderColor = [[UIColor colorWithRed:224/255.0f green:224/255.0f blue:224/255.0f alpha:1.0f]CGColor];
+    
+    UIButton *loginBtn = [self.view viewWithTag:3];
+    loginBtn.layer.cornerRadius = 5;
+}
+
 //点击Enter的时候隐藏软键盘
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self.myName resignFirstResponder];
@@ -94,7 +127,7 @@
                         
                         hVC.Dic = obj;
                         
-                        [self presentViewController:hVC animated:YES completion:nil];//跳转
+                        [self.navigationController pushViewController:hVC animated:YES];//跳转
                         
                     }else if([self.myPassage.text isEqualToString:@""]){
                         UIAlertView *alertVC = [[UIAlertView alloc]initWithTitle:@"提示"

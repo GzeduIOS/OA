@@ -24,15 +24,6 @@
 
 @implementation HomeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 //发送跳转前预处理
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
    
@@ -64,6 +55,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"考勤管理";
     //按钮圆角化
     self.Btn.layer.cornerRadius = 5;
     self.Btn2.layer.cornerRadius = 5;
