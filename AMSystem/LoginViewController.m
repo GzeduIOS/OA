@@ -33,6 +33,7 @@
     [super viewWillAppear:animated];
     [self initStatusBar];
     [self initUI];
+    
 }
 
 -(void)initStatusBar{
