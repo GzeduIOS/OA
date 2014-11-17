@@ -16,7 +16,6 @@
 		3946310319F4E51400AC922F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3946310219F4E51300AC922F /* MobileCoreServices.framework */; };
 		39488DA019CC0A5E00F05A41 /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39488D9E19CC0A5E00F05A41 /* MyTableViewCell.m */; };
 		39488DA119CC0A5E00F05A41 /* MyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39488D9F19CC0A5E00F05A41 /* MyTableViewCell.xib */; };
-		3949A4521A03258F005B945B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3949A4511A03258F005B945B /* Default-568h@2x.png */; };
 		394D043F1A022DDF00E080DF /* splash_screen_small_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 394D043E1A022DDF00E080DF /* splash_screen_small_logo.png */; };
 		394D04411A022DE700E080DF /* register_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 394D04401A022DE700E080DF /* register_background.png */; };
 		394FDBAA19D8F1840088C9AB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 394FDBA919D8F1840088C9AB /* Reachability.m */; };
@@ -105,7 +104,6 @@
 		39488D9D19CC0A5E00F05A41 /* MyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewCell.h; sourceTree = "<group>"; };
 		39488D9E19CC0A5E00F05A41 /* MyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewCell.m; sourceTree = "<group>"; };
 		39488D9F19CC0A5E00F05A41 /* MyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyTableViewCell.xib; sourceTree = "<group>"; };
-		3949A4511A03258F005B945B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		394D043E1A022DDF00E080DF /* splash_screen_small_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_screen_small_logo.png; sourceTree = "<group>"; };
 		394D04401A022DE700E080DF /* register_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = register_background.png; sourceTree = "<group>"; };
 		394FDBA819D8F1840088C9AB /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 		39C3C3CE19B948C7000BE1B2 = {
 			isa = PBXGroup;
 			children = (
-				3949A4511A03258F005B945B /* Default-568h@2x.png */,
 				39C3C3E019B948C7000BE1B2 /* AMSystem */,
 				39C3C3FF19B948C7000BE1B2 /* AMSystemTests */,
 				39C3C3D919B948C7000BE1B2 /* Frameworks */,
@@ -625,7 +622,6 @@
 				397B802719EB81ED006AB51D /* Selected.png in Resources */,
 				395B54A419ED2BEB00D45FCA /* TableViewCell.xib in Resources */,
 				398301C519D41028003D8026 /* fs_main_login_selected.png in Resources */,
-				3949A4521A03258F005B945B /* Default-568h@2x.png in Resources */,
 				39488DA119CC0A5E00F05A41 /* MyTableViewCell.xib in Resources */,
 				394D04411A022DE700E080DF /* register_background.png in Resources */,
 				39C3C42419B96AF6000BE1B2 /* bottom_hr.png in Resources */,
@@ -824,6 +820,8 @@
 		39C3C40A19B948C7000BE1B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -839,6 +837,8 @@
 		39C3C40B19B948C7000BE1B2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
