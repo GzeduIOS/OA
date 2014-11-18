@@ -84,86 +84,99 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XLp-Rt-ydn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg2208.png" id="W4l-IK-XuQ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="XLp-Rt-ydn">
                                 <rect key="frame" x="10" y="86" width="145" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.086274509803921567" green="0.26666666666666666" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="考勤签到">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                </accessibility>
+                                <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="考勤签到" image="01.png">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.4549019608" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="pOV-PT-yiq" kind="push" identifier="SignatureSegue" id="MQa-4d-w7L"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LMH-yz-pEM">
-                                <rect key="frame" x="165" y="86" width="145" height="130"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.086274509803921567" green="0.26666666666666666" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="请假管理">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="IrJ-01-F7X" kind="modal" identifier="LeaveSegue" id="hfA-MT-Oqh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="df6-Wt-419">
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="df6-Wt-419">
                                 <rect key="frame" x="10" y="224" width="145" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.086274509803921567" green="0.26666666666666666" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="考勤查询">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="考勤查询" image="03.png">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.4549019608" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="L46-TZ-iiF" kind="modal" identifier="AQuerySegue" id="PBq-E5-4lJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="U0M-rI-3fU">
-                                <rect key="frame" x="165" y="224" width="145" height="130"/>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="U0M-rI-3fU">
+                                <rect key="frame" x="163" y="224" width="145" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.086274509803921567" green="0.26666666666666666" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="考勤报表">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="-84"/>
+                                <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="考勤报表" image="04.png">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.4549019608" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="git-bC-6Mt" kind="modal" id="u4B-Ij-fJj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rhs-dP-Ve5">
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="Rhs-dP-Ve5">
                                 <rect key="frame" x="10" y="363" width="145" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.086274509803921567" green="0.26666666666666666" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="考勤签到审核">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="titleEdgeInsets" minX="-33" minY="90" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="考勤签到审核" image="05.png">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.4549019608" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="89E-H4-48H" kind="modal" identifier="SignatureApprovalSegue" id="U7h-z9-HjP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gKD-IZ-HOk">
-                                <rect key="frame" x="165" y="363" width="145" height="130"/>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="gKD-IZ-HOk">
+                                <rect key="frame" x="163" y="363" width="145" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.086274509803921567" green="0.26666666666666666" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="请假审核">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="请假审核" image="06.png">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.4549019608" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="IrJ-01-F7X" kind="modal" identifier="LeaveApprovalSegue" id="JfG-cg-nI4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="LMH-yz-pEM">
+                                <rect key="frame" x="163" y="86" width="145" height="130"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="请假管理" image="02.png">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.4549019608" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="IrJ-01-F7X" kind="modal" identifier="LeaveSegue" id="hfA-MT-Oqh"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.93616649469880375" green="0.95811018654930835" blue="0.966888427734375" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.90588241820000004" green="0.92549026010000002" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -1219,6 +1232,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="01.png" width="50" height="50"/>
+        <image name="02.png" width="50" height="50"/>
+        <image name="03.png" width="50" height="50"/>
+        <image name="04.png" width="50" height="50"/>
+        <image name="05.png" width="50" height="50"/>
+        <image name="06.png" width="50" height="50"/>
+        <image name="bg2208.png" width="1242" height="2208"/>
         <image name="btn.png" width="300" height="44"/>
         <image name="camera.png" width="291" height="279"/>
         <image name="logo@3x.png" width="480" height="480"/>
