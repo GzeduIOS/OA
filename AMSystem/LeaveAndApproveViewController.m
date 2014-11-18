@@ -8,6 +8,7 @@
 #import "AMSystemManager.h"
 #import "LeaveAndApproveViewController.h"
 #import "LeaveDetailViewController.h"
+#import "LeaveSubmitViewController.h"
 
 #import "PeoperData.h"
 #import "MyCell.h"
@@ -24,12 +25,10 @@ static NSString *FLAG_YET_APPROVE = @"Y";
 
 @interface LeaveAndApproveViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *topView;
-@property (weak, nonatomic) IBOutlet UILabel *lblViewTitle;
+
 @property (weak, nonatomic) IBOutlet UIProgressView *Progress;
 @property (weak, nonatomic) IBOutlet UIButton *btnApproved;//已审核
 @property (weak, nonatomic) IBOutlet UIButton *btnApprove;//未审核
-@property (weak, nonatomic) IBOutlet UIButton *btnFillForm;//填写假条
 @property (strong ,nonatomic) UITableView *NotApproveView;//未审核视图区域
 @property (strong ,nonatomic) UITableView *ApproveView;//已审核视图区域
 @property (strong ,nonatomic) UIButton *btnBatchApprove;//用于审核请假界面的按钮
@@ -71,7 +70,7 @@ static NSString *FLAG_YET_APPROVE = @"Y";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.selectedLeaveId = [NSMutableArray array];
     self.userDefaults = [NSUserDefaults standardUserDefaults];
     apiKey = [self.userDefaults stringForKey:@"KEY"];
@@ -80,6 +79,7 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     viewWidth = self.view.frame.size.width;
     topSpeace = 110;//与顶间距
     viewCount = 2;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"请假申请" style:UIBarButtonItemStylePlain target:self action:@selector(leaveSubmitUp)];//右按钮
     
     /*
      * (界面共享)
@@ -87,20 +87,21 @@ static NSString *FLAG_YET_APPROVE = @"Y";
      */
     if ([self.segueId isEqualToString:@"LeaveSegue"]) {
         //请假管理
-        self.lblViewTitle.text = @"请假申请单";
-        
+        self.title = @"请假申请单";
+    
         //来源为管理级别的都设置为普通员工
         if ([@"2" isEqualToString:userType]
             ||
-            [@"1" isEqualToString:userType]) {
+            [@"1" isEqualToString:userType]){
             self.userType = @"1";
         }
         
     }else if ([self.segueId isEqualToString:@"LeaveApprovalSegue"]) {
         //请假审核
-        self.lblViewTitle.text = @"审核请假";
+        self.title = @"审核请假";
         
-        [self.btnFillForm removeFromSuperview];//刷除请假管理的按钮
+       //刷除请假管理的按钮
+        self.navigationItem.rightBarButtonItem = nil;
         [self initBatchApproveBtn];//初始化批量审核按钮
     }
     
@@ -111,6 +112,17 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     
     //优先请求未审核数据
     [self requestDataToInitTableViewByStatus:FLAG_NOT_APPROVE];
+}
+
+//跳转请假申请界面
+-(void)leaveSubmitUp{
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] init];
+    backBarButtonItem.title = @"";
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationItem.backBarButtonItem = backBarButtonItem;
+    LeaveSubmitViewController *leaveSubmitVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveSubmitViewID"];
+    [self.navigationController pushViewController:leaveSubmitVC animated:YES];
+    
 }
 
 -(void) requestDataToInitTableViewByStatus:(NSString *)status{
@@ -182,20 +194,8 @@ static NSString *FLAG_YET_APPROVE = @"Y";
 -(void)initBatchApproveBtn{
     /*
      * 绘制"批量审核"按钮
-     * 大小,位置
-     * 文字,颜色
      */
-    self.btnBatchApprove = [[UIButton alloc]initWithFrame:CGRectMake(232, 10, 68, 30)];
-    self.btnBatchApprove.titleLabel.font = [UIFont systemFontOfSize:15];
-    self.btnBatchApprove.backgroundColor = [UIColor colorWithHexString:@"0D74FD"];
-    [self.btnBatchApprove setTitle:@"批量审核" forState:UIControlStateNormal];//0D74FD
-    [self.btnBatchApprove setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    
-    //按钮添加事情
-    [self.btnBatchApprove addTarget:self action:@selector(btnBatchApproveUpAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //加入按钮元素
-    [self.topView addSubview:self.btnBatchApprove];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"批量审核" style:UIBarButtonItemStylePlain target:self action:@selector(btnBatchApproveUpAction:)];//右按钮
 }
 
 //手势手指拖事件
@@ -217,16 +217,8 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     if (notApproveDataAry.count) {
         self.NotApproveView.allowsMultipleSelectionDuringEditing = YES;
         [self.NotApproveView setEditing:YES animated:YES];
-        
-        self.btnBatchApprove = nil;//原按钮指向空
-        
-        self.btnConfirm = [[UIButton alloc]initWithFrame:CGRectMake(232, 10, 68, 30)];
-        self.btnConfirm.titleLabel.font = [UIFont systemFontOfSize:15];
-        self.btnConfirm.backgroundColor = [UIColor colorWithHexString:@"0D74FD"];
-        [self.btnConfirm setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-        [self.btnConfirm setTitle:@"确定" forState:UIControlStateNormal];
-        [self.btnConfirm addTarget:self action:@selector(remindAndSubmitAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.topView addSubview:self.btnConfirm];
+        self.navigationItem.rightBarButtonItem = nil;//原按钮指向空
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(remindAndSubmitAction:)];//右按钮
     }
     
 }
@@ -257,8 +249,8 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     //按下按钮触发
     
     if(buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2){
-        [self.btnConfirm removeFromSuperview];
-        [self.btnBatchApprove setTitle:@"批量审核" forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"批量审核" style:UIBarButtonItemStylePlain target:self action:@selector(btnBatchApproveUpAction:)];
         self.NotApproveView.allowsMultipleSelectionDuringEditing = NO;
         [self.NotApproveView setEditing:NO animated:YES];
         
@@ -274,13 +266,24 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     CGFloat index = sender.tag -1;
     if (index == 0) {//没审核
         self.btnBatchApprove.hidden = NO;
-        self.btnFillForm.hidden = NO;
+        if ([self.segueId isEqualToString:@"LeaveSegue"]) {
+            //请假管理
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"请假申请" style:UIBarButtonItemStylePlain target:self action:@selector(leaveSubmitUp)];//右按钮
+            
+        }else if ([self.segueId isEqualToString:@"LeaveApprovalSegue"]) {
+            //请假审核
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"批量审核" style:UIBarButtonItemStylePlain target:self action:@selector(btnBatchApproveUpAction:)];
+        }
+
         if(!isInitAtNotView){
             [self requestDataToInitTableViewByStatus:FLAG_NOT_APPROVE];
         }
     }else if(index == 1){//已审核
         self.btnBatchApprove.hidden = YES;
-        self.btnFillForm.hidden = YES;
+        self.navigationItem.rightBarButtonItem = nil;
+        self.NotApproveView.allowsMultipleSelectionDuringEditing = NO;
+        [self.NotApproveView setEditing:NO animated:YES];
+
         if(!isInitAtYetView){
             [self requestDataToInitTableViewByStatus:FLAG_YET_APPROVE];
         }
@@ -387,8 +390,11 @@ static NSString *FLAG_YET_APPROVE = @"Y";
             [user synchronize];
             
             LeaveDetailViewController *infoVC = [self createInfoView:peoper andRoleCode:roleCode];
-            
-            [self presentViewController:infoVC animated:YES completion:nil];
+            UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] init];
+            backBarButtonItem.title = @"";
+            self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+            self.navigationItem.backBarButtonItem = backBarButtonItem;
+            [self.navigationController pushViewController:infoVC animated:YES];
         }
     }
 }

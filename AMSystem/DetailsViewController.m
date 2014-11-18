@@ -25,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    self.title = @"考勤详情";
      self.userdefaults = [NSUserDefaults standardUserDefaults];
     [AMSystemManager interfaceAttendanceDetail:[self.userdefaults stringForKey:@"KEY"] userId:self.STRid complation:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -65,9 +65,6 @@
 
         });
     }];
-}
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

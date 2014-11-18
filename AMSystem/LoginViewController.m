@@ -39,11 +39,12 @@
 -(void)initStatusBar{
     //设置状态栏为跟随bar字体颜色
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-    //设置bar背景颜色
+    //
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:38/255.0f green:109/255.0f blue:191/255.0f alpha:1.0f];
     //设置bar字体颜色
     self.navigationController.navigationBar.titleTextAttributes =[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     self.view.backgroundColor = [UIColor colorWithRed:241/255.0f green:241/255.0f blue:241/255.0f alpha:1.0f];
+   //设置bar背景颜色 [[UINavigationBar appearance] setBarTintColor:[UIColor grayColor]];
 }
 
 -(void)initUI{

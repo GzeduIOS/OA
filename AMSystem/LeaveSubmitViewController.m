@@ -37,11 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.title = @"请假申请";
     self.MyTextView.delegate = self;
-    UIImage *image = [UIImage imageNamed:@"u20.png"];
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10) resizingMode:UIImageResizingModeStretch];
-    [self.Uploadbtn setBackgroundImage:image forState:UIControlStateNormal];
     NSDate *now = [NSDate date];
      self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -179,16 +176,13 @@
     
     [AMSystemManager interfaceLeaveApply:[userDefaults stringForKey:@"KEY"] beginTime:self.btn2.titleLabel.text endTime:self.btn3.titleLabel.text applyType:CODE applyReason:self.MyTextView.text complation:^(id obj) {
         //提示语
+        MyLog(@"%@",obj);
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.navigationController popViewControllerAnimated:YES];
         });
         
     }];
 
-}
-
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 // 单选框
 - (NSInteger)popoverListView:(ZSYPopoverListView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -22,7 +22,6 @@ static NSString *FLAG_YET_APPROVE = @"Y";
 
 @interface SignatureApprovalViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *topView;
 
 @property (strong ,nonatomic) UITableView *NotApproveView;//未审核视图
 @property (strong ,nonatomic) UITableView *ApproveView;//已审核视图
@@ -48,7 +47,7 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     [super viewDidLoad];
     
     //标题
-    self.TintLabel.text = @"考勤签到审核";
+    self.title = @"考勤签到审核";
     self.selectedLeaveId = [NSMutableArray array];
     self.userDefaults = [NSUserDefaults standardUserDefaults];
     
@@ -151,13 +150,7 @@ static NSString *FLAG_YET_APPROVE = @"Y";
 }
 
 -(void)initBatchApproveBtn{
-    self.btnBatchApprove = [[UIButton alloc]initWithFrame:CGRectMake(232, 10, 68, 30)];
-    self.btnBatchApprove.titleLabel.font = [UIFont systemFontOfSize:15];
-    self.btnBatchApprove.backgroundColor = [UIColor colorWithHexString:@"0D74FD"];
-    [self.btnBatchApprove setTitle:@"批量审核" forState:UIControlStateNormal];//0D74FD
-    [self.btnBatchApprove setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    [self.btnBatchApprove addTarget:self action:@selector(remindAndSubmitAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topView addSubview:self.btnBatchApprove];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"批量审核" style:UIBarButtonItemStyleDone target:self action:@selector(remindAndSubmitAction:)];
 }
 //手势手指拖事件
 -(void)handleDragGesture:(UIPanGestureRecognizer *)sender{
@@ -271,12 +264,12 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     NSInteger index = sender.tag -1;
     
     if (index == 0) {//没审核
-        self.btnBatchApprove.hidden = NO;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"批量审核" style:UIBarButtonItemStyleDone target:self action:@selector(remindAndSubmitAction:)];
         if(!isInitAtNotView){
             [self requestDataToInitTableViewByStatus:FLAG_NOT_APPROVE];
         }
     }else if(index == 1){//已审核
-        self.btnBatchApprove.hidden = YES;
+        self.navigationItem.rightBarButtonItem = nil;
         if(!isInitAtYetView){
             [self requestDataToInitTableViewByStatus:FLAG_YET_APPROVE];
         }
@@ -299,10 +292,6 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     
     [UIView commitAnimations];
     
-}
-
-- (IBAction)Back:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning{

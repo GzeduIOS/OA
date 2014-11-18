@@ -18,7 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.title = @"请假详情";
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     _userKey = [userDefaults stringForKey:@"KEY"];
     
@@ -63,15 +63,10 @@
     
     [AMSystemManager interfaceLeaveBatchApprove:_userKey leaveApplyIds:_leaveId auditStatus:status complation:^(id obj) {
         //完成跳回列表页
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 
-
-
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
