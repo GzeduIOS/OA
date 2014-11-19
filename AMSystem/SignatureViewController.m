@@ -17,6 +17,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *photoBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 @property (weak, nonatomic) IBOutlet UIButton *rephotoButton;
+@property (weak, nonatomic) IBOutlet UIView *sumitInfoView;
+@property (weak, nonatomic) IBOutlet UILabel *sumitInfoView_typeLable;
+@property (weak, nonatomic) IBOutlet UILabel *sumitInfoView_timeLable;
+@property (weak, nonatomic) IBOutlet UILabel *sumitInfoView_locationLable;
+@property (weak, nonatomic) IBOutlet UIButton *sumitInfoView_reselectButton;
+@property (weak, nonatomic) IBOutlet UIButton *sumitInfoView_submitButton;
+@property (weak, nonatomic) IBOutlet UILabel *remiderLable;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImageVIew;
 
 @property (strong, nonatomic)NSMutableArray *arrImage;
 @property (strong, nonatomic)NSString *adder;//用于提交时发送地址
@@ -51,12 +59,23 @@
     self.title = @"考勤签到";
     self.photoImageView.hidden = YES;//隐藏imageview
     self.rephotoButton.hidden = YES;//隐藏rephotobutton
+    self.sumitInfoView.hidden = YES;//隐藏submitinfoView
+    self.arrowImageVIew.hidden = YES ;//隐藏arrowImageView
     //Location API init
+    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;//精确到10米
     self.locationManager.distanceFilter = 1000.0f;
-
+    
+    //三个按钮de点击切换图
+    self.btn1.layer.borderColor = [[UIColor lightGrayColor]CGColor];
+    self.btn1.layer.borderWidth = 1;
+    self.btn2.layer.borderColor = [[UIColor lightGrayColor]CGColor];
+    self.btn2.layer.borderWidth = 1;
+    self.btn3.layer.borderColor = [[UIColor lightGrayColor]CGColor];
+    self.btn3.layer.borderWidth = 1;
+    
 }
 //准备显示视图
 - (void)viewWillAppear:(BOOL)animated{
@@ -77,10 +96,18 @@
 
 //签到//日记//签退
 - (IBAction)btn1:(UIButton *)sender {
-    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-    
+    UIImage *image = [[UIImage alloc]init];
+    if (sender.tag == 0) {
+        image = [UIImage imageNamed:@"attendance1-1.png"];
+    }else if (sender.tag == 1){
+        image = [UIImage imageNamed:@"attendance2-2.png"];
+    }else{
+        image = [UIImage imageNamed:@"attendance3-3.png"];
+    }
+    [sender setImage:image forState:UIControlStateNormal];
+    [sender setTitleColor:[UIColor colorWithRed:38/255.0f green:109/255.0f blue:191/255.0f alpha:1.0f] forState:UIControlStateNormal];
     self.tag = (NSUInteger *)sender.tag;
-    
+    self.sumitInfoView_typeLable.text = sender.titleLabel.text;
     [self showInfo];//展示信息
 }
 //展示信息
@@ -99,71 +126,47 @@
         }
         
     }];
-    
+   
 }
-
 //绘制地址及时间显示
 -(void)createLocationInfo:(NSDictionary *)locationInfos
 {
-    //绘制显示空间
-    UIView *infoView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-(self.btn1.frame.size.height+70), self.view.frame.size.width, 50)];
-    
     //地址
-    //NSLog(@"locationInfos : %@",locationInfos);
-    NSString *state = [locationInfos valueForKey:@"State"];//省
     NSString *city = [locationInfos valueForKey:@"City"];//市
-    NSString *street = [locationInfos valueForKey:@"Street"];//街道
-    
+  //  NSString *subLocality = [locationInfos valueForKey:@"SubLocality"];//区
+    NSString *thoroughfare = [locationInfos valueForKey:@"Thoroughfare"];//街道
+    NSString *state = [locationInfos valueForKey:@"State"];//省
     NSMutableString *address = [NSMutableString stringWithCapacity:100];
     [address appendString:state];
     [address appendString:city];
-    [address appendString:street];
+ // [address appendString:subLocality];
+    [address appendString:thoroughfare];
     
     self.adder = address;//用于提交时发送
-    
-    infoView.backgroundColor = [UIColor whiteColor];
-    UILabel *lbl_address = [[UILabel alloc]initWithFrame:CGRectMake(10, infoView.frame.size.height/2, self.view.frame.size.width, infoView.frame.size.height/2)];
-    lbl_address.text = [NSString stringWithFormat:@"签到地点:%@",address];
-    
-    
+    self.sumitInfoView_locationLable.text = [NSString stringWithFormat:@"%@",address];
     //签到时间
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     NSString *addartime = [NSString stringWithFormat:@"%@-%@-%@ %@:%@",[dateString substringWithRange:NSMakeRange(0, 4)],[dateString substringWithRange:NSMakeRange(4, 2)],[dateString substringWithRange:NSMakeRange(6, 2)],[dateString substringWithRange:NSMakeRange(8, 2)],[dateString substringWithRange:NSMakeRange(10, 2)]];
     
-    UILabel *lbl_signatureTime = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, self.view.frame.size.width,infoView.frame.size.height/2)];
-    lbl_signatureTime.text = [NSString stringWithFormat:@"本次签到时间:%@",addartime];
-    
-    
+    self.sumitInfoView_timeLable.text = [NSString stringWithFormat:@"%@",addartime];
+
     //提交按钮
-    UIButton *btn_submit = [[UIButton alloc]init];
-    btn_submit.frame = CGRectMake(4,self.btn1.frame.origin.y-10,self.view.frame.size.width-2*4, self.btn1.frame.size.height+10);
-    [btn_submit setTitle:@"提交" forState:UIControlStateNormal];
-    [btn_submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-    [btn_submit addTarget:self action:@selector(chickUp:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    //拍照背景
-    UIImage *image = [UIImage imageNamed:@"u20.png"];
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10) resizingMode:UIImageResizingModeStretch];
-    
-    [btn_submit setBackgroundImage:image forState:UIControlStateNormal];
-    
-    
-    
-    [infoView addSubview:lbl_address];
-    [infoView addSubview:lbl_signatureTime];
-    [self.btn1 removeFromSuperview];//去除原有的三个按钮
-    [self.btn2 removeFromSuperview];
-    [self.btn3 removeFromSuperview];
-    [self.view addSubview:btn_submit];
-    [self.view addSubview:infoView];
+    [self.sumitInfoView_submitButton addTarget:self action:@selector(chickUp:) forControlEvents:UIControlEventTouchUpInside];
+    //重选按钮
+    [self.sumitInfoView_reselectButton addTarget:self action:@selector(reselectInfo) forControlEvents:UIControlEventTouchUpInside];
+    self.btn1.hidden = YES;//隐藏原有的三个按钮
+    self.btn2.hidden = YES;
+    self.btn3.hidden = YES;
+    self.remiderLable.hidden = YES;
+    self.sumitInfoView.hidden = NO;
 }
 //调用照相机
 - (IBAction)photoBtn:(UIButton *)sender {
     [self takePhoto];
 }
+//调用照相机方法
 -(void)takePhoto{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -181,6 +184,28 @@
     });
 
 }
+//重选方法
+-(void)reselectInfo{
+    self.photoImageView.hidden = YES;//隐藏imageview
+    self.rephotoButton.hidden = YES;//隐藏rephotobutton
+    self.sumitInfoView.hidden = YES;//隐藏submitinfoView
+    self.arrowImageVIew.hidden = YES ;//隐藏arrowImageView
+    
+    //显示隐藏的三按钮。并把状态恢复
+    self.btn1.hidden = NO;
+    self.btn2.hidden = NO;
+    self.btn3.hidden = NO;
+    [self.btn1 setImage:[UIImage imageNamed:@"attendance1.png"] forState:UIControlStateNormal];
+    [self.btn1 setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [self.btn2 setImage:[UIImage imageNamed:@"attendance2.png"] forState:UIControlStateNormal];
+    [self.btn2 setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [self.btn3 setImage:[UIImage imageNamed:@"attendance3.png"] forState:UIControlStateNormal];
+    [self.btn3 setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    self.remiderLable.hidden = NO;
+    self.photoBtn.hidden = NO;
+    self.remiderLable.text = @"请点击打开相机拍照签到或直接选择以下方式签到";
+    
+}
 //保存照片
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -192,7 +217,15 @@
         self.photoBtn.hidden = YES;
         self.photoImageView.hidden = NO;
         self.rephotoButton.hidden = NO;
+        if (self.sumitInfoView.hidden == YES) {
+            self.arrowImageVIew.hidden = NO;
+            self.remiderLable.text = @"请选择以下方式签到";
+        }else{
+            self.remiderLable.hidden = YES;
+        }
+        
         self.photoImageView.image = img;
+        
         [self.arrImage addObject:self.imagedata];
         MyLog(@"%u",[self.imagedata length]/1024);
         [self.rephotoButton addTarget:self action:@selector(takePhoto) forControlEvents:UIControlEventTouchUpInside];
@@ -234,19 +267,12 @@
         }
         //返回接口返回值(NSDictionary)
         [AMSystemManager interfaceRegister:KEY userSignType:ROLE_CODE userSignAddress:self.adder userLongitude:longitude userLatitude:latitude pictureData:self.imagedata complation:^(id obj) {
-            
-            //MyLog(@"%@",obj);
-            [self dismissViewControllerAnimated:YES completion:nil];//关闭签到界面
+            MyLog(@"%@",obj);
+            [self.navigationController popViewControllerAnimated:YES];//关闭签到界面
             
         }];
         
     });
    
 }
-
-- (IBAction)back:(id)sender {
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 @end
