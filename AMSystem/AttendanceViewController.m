@@ -32,8 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    myReachability *R = [[myReachability alloc]init];
-//    [R myreachability:self.view];
+
+    self.title = @"签到情况";
     self.array = [MyJsonParser parseAttendByarr:self.AttendanceArr];
     self.myTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];////UITableView隐藏多余的分割线
   
@@ -80,7 +80,11 @@
         NSString *strID = Data.attendanceId;
         DetailsViewController *detaiVC = [[self storyboard] instantiateViewControllerWithIdentifier:@"attSugue"];
         detaiVC.STRid = strID;
-        [self presentViewController:detaiVC animated:YES completion:nil];
+        UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] init];
+        backBarButtonItem.title = @"";
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        self.navigationItem.backBarButtonItem = backBarButtonItem;
+        [self.navigationController pushViewController:detaiVC animated:YES];
     }
     
 }

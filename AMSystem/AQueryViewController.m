@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title  = @"考勤查询";
     self.userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userKey=[self.userDefaults objectForKey:@"KEY"];
     
@@ -112,14 +113,14 @@
         
         AttendanceViewController *attendVC = [[self storyboard] instantiateViewControllerWithIdentifier:@"Attendance Identifier"];
         attendVC.AttendanceArr = obj;
-        
-        [self presentViewController:attendVC animated:YES completion:nil];
+        UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] init];
+        backBarButtonItem.title = @"";
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        self.navigationItem.backBarButtonItem = backBarButtonItem;
+        [self.navigationController pushViewController:attendVC animated:YES];
     }];
 }
 
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -59,7 +59,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.title = @"考勤报表";
     NSDate *now = [NSDate date];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -134,17 +134,16 @@
     if (self.array.count) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         AQueryViewController *AQueryView = [[self storyboard] instantiateViewControllerWithIdentifier:@"AQuery Identity"];
-        
-        [self presentViewController:AQueryView animated:YES completion:nil];
+        UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] init];
+        backBarButtonItem.title = @"";
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        self.navigationItem.backBarButtonItem = backBarButtonItem;
+        [self.navigationController pushViewController:AQueryView animated:YES];
     }
 }
 - (NSInteger) tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 0;
-}
-
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 //从——到
 - (IBAction)startBtn:(UIButton *)sender {
