@@ -85,6 +85,7 @@
 		CE29CD3D1A11DEA30030C202 /* UIScrollView+VORefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29CD3A1A11DEA30030C202 /* UIScrollView+VORefresh.m */; };
 		CE29CD3E1A11DEA30030C202 /* VORefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29CD3C1A11DEA30030C202 /* VORefreshView.m */; };
 		CE29CD441A11E5530030C202 /* LeaveAndApproveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29CD431A11E5530030C202 /* LeaveAndApproveViewController.m */; };
+		CE67CEBE1A1C80DA0053F425 /* UIStoryboard+UIStoryboard_EEOAStoryboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CE67CEBD1A1C80DA0053F425 /* UIStoryboard+UIStoryboard_EEOAStoryboard.m */; };
 		CE7C50541A1AE35900264D0D /* bg480.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7C504F1A1AE35900264D0D /* bg480.png */; };
 		CE7C50551A1AE35900264D0D /* bg960.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7C50501A1AE35900264D0D /* bg960.png */; };
 		CE7C50561A1AE35900264D0D /* bg1136.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7C50511A1AE35900264D0D /* bg1136.png */; };
@@ -280,6 +281,8 @@
 		CE29CD3C1A11DEA30030C202 /* VORefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VORefreshView.m; sourceTree = "<group>"; };
 		CE29CD421A11E5530030C202 /* LeaveAndApproveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveAndApproveViewController.h; sourceTree = "<group>"; };
 		CE29CD431A11E5530030C202 /* LeaveAndApproveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveAndApproveViewController.m; sourceTree = "<group>"; };
+		CE67CEBC1A1C80DA0053F425 /* UIStoryboard+UIStoryboard_EEOAStoryboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+UIStoryboard_EEOAStoryboard.h"; sourceTree = "<group>"; };
+		CE67CEBD1A1C80DA0053F425 /* UIStoryboard+UIStoryboard_EEOAStoryboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+UIStoryboard_EEOAStoryboard.m"; sourceTree = "<group>"; };
 		CE7C504F1A1AE35900264D0D /* bg480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg480.png; sourceTree = "<group>"; };
 		CE7C50501A1AE35900264D0D /* bg960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg960.png; sourceTree = "<group>"; };
 		CE7C50511A1AE35900264D0D /* bg1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg1136.png; sourceTree = "<group>"; };
@@ -484,6 +487,7 @@
 				39C3C3E319B948C7000BE1B2 /* InfoPlist.strings */,
 				39C3C3E619B948C7000BE1B2 /* main.m */,
 				39C3C3E819B948C7000BE1B2 /* AMSystem-Prefix.pch */,
+				CE67CEBB1A1C806D0053F425 /* EEOA Storyboard */,
 				CE29CD221A11DDE00030C202 /* PullRefresh Plugin */,
 				397293D619C9281D00AB1B12 /* Calendar Plugin */,
 				394430E419D4FD17007D6132 /* ZSYPopoverListView */,
@@ -618,6 +622,15 @@
 				39C3C43519B99E8A000BE1B2 /* SignatureViewController.m */,
 			);
 			name = Signature;
+			sourceTree = "<group>";
+		};
+		CE67CEBB1A1C806D0053F425 /* EEOA Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				CE67CEBC1A1C80DA0053F425 /* UIStoryboard+UIStoryboard_EEOAStoryboard.h */,
+				CE67CEBD1A1C80DA0053F425 /* UIStoryboard+UIStoryboard_EEOAStoryboard.m */,
+			);
+			name = "EEOA Storyboard";
 			sourceTree = "<group>";
 		};
 		CE7C50591A1AED0100264D0D /* 主界面 */ = {
@@ -995,6 +1008,7 @@
 				397293DC19C9597100AB1B12 /* DetailsViewController.m in Sources */,
 				39C3C43619B99E8A000BE1B2 /* SignatureViewController.m in Sources */,
 				39488DA019CC0A5E00F05A41 /* MyTableViewCell.m in Sources */,
+				CE67CEBE1A1C80DA0053F425 /* UIStoryboard+UIStoryboard_EEOAStoryboard.m in Sources */,
 				39C3C3EB19B948C7000BE1B2 /* AppDelegate.m in Sources */,
 				CE29CD441A11E5530030C202 /* LeaveAndApproveViewController.m in Sources */,
 				395B54A319ED2BEB00D45FCA /* TableViewCell.m in Sources */,
