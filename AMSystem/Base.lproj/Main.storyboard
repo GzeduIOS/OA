@@ -915,15 +915,19 @@
                                     <action selector="btn1:" destination="pOV-PT-yiq" eventType="touchUpInside" id="vdX-89-Pyl"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请点击相机拍照签到或直接选择以下方式签到" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1pg-bR-fWf">
-                                <rect key="frame" x="38" y="366" width="244" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请点击打开相机拍照签到或直接选择以下方式签到" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1pg-bR-fWf">
+                                <rect key="frame" x="38" y="366" width="244" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="DBC-ZY-2A5">
+                                <rect key="frame" x="14" y="92" width="290" height="275"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="cgd-wp-KS0">
-                                <rect key="frame" x="15" y="76" width="290" height="275"/>
+                                <rect key="frame" x="16" y="92" width="290" height="275"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" image="camera.png">
@@ -934,6 +938,13 @@
                                     <action selector="photoBtn:" destination="pOV-PT-yiq" eventType="touchUpInside" id="spp-Rn-GHX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cBi-X2-jIQ">
+                                <rect key="frame" x="244" y="92" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="rephotograph.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
@@ -943,11 +954,13 @@
                         <outlet property="btn2" destination="BPn-SR-l7m" id="Wlq-ss-1kS"/>
                         <outlet property="btn3" destination="OaY-yl-NHx" id="RyI-Hj-J7n"/>
                         <outlet property="photoBtn" destination="cgd-wp-KS0" id="4H5-T6-nNe"/>
+                        <outlet property="photoImageView" destination="DBC-ZY-2A5" id="lvD-dU-p0S"/>
+                        <outlet property="rephotoButton" destination="cBi-X2-jIQ" id="2MR-Ws-bwG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0LU-bK-Icd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1168" y="-796"/>
+            <point key="canvasLocation" x="1138" y="-855"/>
         </scene>
         <!--Signature Approval View Controller-->
         <scene sceneID="cuw-di-uYI">
@@ -1042,6 +1055,7 @@
         <image name="camera.png" width="230" height="230"/>
         <image name="logo@3x.png" width="480" height="480"/>
         <image name="pass.png" width="25" height="25"/>
+        <image name="rephotograph.png" width="60" height="60"/>
         <image name="splash_screen_bg.png" width="720" height="1280"/>
         <image name="user.png" width="25" height="25"/>
     </resources>

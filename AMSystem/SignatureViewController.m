@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn2;
 @property (weak, nonatomic) IBOutlet UIButton *btn3;
 @property (weak, nonatomic) IBOutlet UIButton *photoBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UIButton *rephotoButton;
+
 @property (strong, nonatomic)NSMutableArray *arrImage;
 @property (strong, nonatomic)NSString *adder;//用于提交时发送地址
 @property (nonatomic)NSUInteger *tag;//签到类型
@@ -46,7 +49,8 @@
     [super viewDidLoad];
     self.arrImage = [[NSMutableArray alloc]init];
     self.title = @"考勤签到";
-    
+    self.photoImageView.hidden = YES;//隐藏imageview
+    self.rephotoButton.hidden = YES;//隐藏rephotobutton
     //Location API init
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -158,6 +162,9 @@
 }
 //调用照相机
 - (IBAction)photoBtn:(UIButton *)sender {
+    [self takePhoto];
+}
+-(void)takePhoto{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         //判断是否可以打开相机，模拟器此功能无法使用
@@ -170,8 +177,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self presentViewController:imagePicker animated:YES completion:nil];
         });
-
+        
     });
+
 }
 //保存照片
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -181,11 +189,13 @@
     self.imagedata = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage],0.000001);
     UIImage *img = [[UIImage alloc]initWithData:self.imagedata];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.photoBtn setBackgroundImage:img forState:UIControlStateNormal];
-        [self.photoBtn setImage:nil forState:UIControlStateNormal];
+        self.photoBtn.hidden = YES;
+        self.photoImageView.hidden = NO;
+        self.rephotoButton.hidden = NO;
+        self.photoImageView.image = img;
         [self.arrImage addObject:self.imagedata];
         MyLog(@"%u",[self.imagedata length]/1024);
-        
+        [self.rephotoButton addTarget:self action:@selector(takePhoto) forControlEvents:UIControlEventTouchUpInside];
         [self dismissViewControllerAnimated:YES completion:nil];//关闭拍照后选择界面
     });
    // UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);//把拍照图片保存到本地
