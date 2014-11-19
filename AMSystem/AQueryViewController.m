@@ -28,22 +28,77 @@
 {
     [super viewDidLoad];
     self.userDefaults = [NSUserDefaults standardUserDefaults];
-    VRGCalendarView *calendar = [[VRGCalendarView alloc]init];
-    calendar.delegate = self;
-    calendar.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.width);
-    [self.view addSubview:calendar];
+    NSString *userKey=[self.userDefaults objectForKey:@"KEY"];
+    
+    [AMSystemManager interfaceAttendanceReportExactToDay:userKey serachDate:@"4" complation:^(id obj) {
+        if ([@"1" isEqualToString:[obj objectForKey:@"result"]]) {
+            NSString *BBBB=@"START";
+            NSLog(@"%@",BBBB);
+            NSLog(@"%@",obj);
+            [self initViews:obj[@"list"]];
+//            [self initViews:[obj objectForKey:@"list"]];
+        }
+    }];
     
     // Do any additional setup after loading the view.
 }
 
--(void)calendarView:(VRGCalendarView *)calendarView switchedToMonth:(int)month targetHeight:(float)targetHeight animated:(BOOL)animated{
-    if (month == (int)[NSDate date]) {
-        NSArray *dates = [NSArray arrayWithObjects:[NSNumber numberWithInt:1],[NSNumber numberWithInt:5], nil];
-        [calendarView markDates:dates];
-    }
-   
+-(void)initViews:(NSArray *)array{
+    
+    VRGCalendarView *calendar = [[VRGCalendarView alloc]init];
+    calendar.delegate = self;
+    calendar.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.width);
+    [self.view addSubview:calendar];
 }
 
+-(void)calendarView:(VRGCalendarView *)calendarView switchedToMonth:(int)month targetHeight:(float)targetHeight animated:(BOOL)animated{
+//    if (month == (int)[NSDate date]) {
+//        NSArray *dates = [NSArray arrayWithObjects:[NSNumber numberWithInt:1],[NSNumber numberWithInt:5], nil];
+//        [calendarView markDates:dates];
+//    }
+    [calendarView markDates:[self libRandDays]];
+   
+}
+-(NSArray *)libRandDays{
+    NSMutableArray *randomArr = [[NSMutableArray alloc] init];
+    
+    do {
+        int random = arc4random()%29 +1;
+        
+        NSString *randomString = [NSString stringWithFormat:@"%d",random];
+        
+        if (![randomArr containsObject:randomString]) {
+            NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+            [dict setObject:[self shortinformation] forKey:@"info"];
+            [dict setObject:randomString forKey:@"day"];
+            [randomArr addObject:dict];
+//            [randomArr addObject:randomString];
+        }
+        else{
+            NSLog(@"数组中有已有该随机数，重新取数！");
+        }
+        
+    } while (randomArr.count != 10);
+    return randomArr;
+}
+-(NSString *)shortinformation{
+    NSString *str=@"正常";
+    int random=arc4random()%3;
+    switch (random) {
+        case 0:
+            str=@"请假";
+            break;
+        case 1:{
+            str=@"旷班";
+        }break;
+        case 2:{
+            str=@"加班";
+        }break;
+        default:
+            break;
+    }
+    return str;
+}
 -(void)calendarView:(VRGCalendarView *)calendarView dateSelected:(NSDate *)date{
     
     //实例化一个NSDateFormatter对象
