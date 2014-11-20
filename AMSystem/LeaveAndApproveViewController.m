@@ -62,11 +62,6 @@ static NSString *FLAG_YET_APPROVE = @"Y";
 @synthesize isInitAtNotView;
 @synthesize isInitAtYetView;
 
-//返回按钮
-- (IBAction)Back:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -110,9 +105,9 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     //优先请求未审核数据
     [self requestDataToInitTableViewByStatus:FLAG_NOT_APPROVE];
 }
+
 -(void)leaveSubmitView{
     LeaveSubmitViewController *leaveSubmitVC = [[self storyboard]instantiateViewControllerWithIdentifier:@"leaveSubmitViewID"];
-    
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] init];
     backBarButtonItem.title = @"";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -286,7 +281,7 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     (index == 0 ? [UIColor lightGrayColor] : [UIColor blueColor]);
     
     //scrollView动画
-    [self.ScrollView setContentOffset:CGPointMake(320 * index, 0)];//页面滑动
+    [self.ScrollView setContentOffset:CGPointMake(viewWidth * index, 0)];//页面滑动
     
     [UIView commitAnimations];
     
@@ -399,6 +394,8 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     infoVC.userRoleCode = roleCode;
     infoVC.leaveId = peoper.leaveId;
     infoVC.isHiddenApproveArea = [self.segueId isEqualToString:@"LeaveSegue"];
+    infoVC.ishiddenNotView = isInitAtYetView ;
+    
     return infoVC;
 }
 

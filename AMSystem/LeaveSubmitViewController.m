@@ -57,7 +57,7 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setLocale:[NSLocale systemLocale]];//[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
     [self.dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    datePicker = [[JCDatePicker alloc] initWithFrame:CGRectMake(0, 0, 300, 180)];
+    datePicker = [[JCDatePicker alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 180)];
     datePicker.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
     [self.view addSubview:datePicker];
     datePicker.delegate = self;
@@ -214,7 +214,7 @@
 {
     UITableViewCell *cell = [tableView popoverCellForRowAtIndexPath:indexPath];
     cell.imageView.image = [UIImage imageNamed:@"fs_main_login_normal.png"];
-    NSLog(@"deselect:%@", self.array[indexPath.row]);
+ //   NSLog(@"deselect:%@", self.array[indexPath.row]);
 }
 // 单选框
 - (void)popoverListView:(ZSYPopoverListView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -222,7 +222,7 @@
 //   self.selectedIndexPath = indexPath;
     UITableViewCell *cell = [tableView popoverCellForRowAtIndexPath:indexPath];
     cell.imageView.image = [UIImage imageNamed:@"fs_main_login_selected.png"];
-    NSLog(@"select:%@", self.array[indexPath.row]);
+   // NSLog(@"select:%@", self.array[indexPath.row]);
     [self.btn1 setTitle:self.array[indexPath.row] forState:UIControlStateNormal];
 }
 
