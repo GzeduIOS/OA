@@ -137,6 +137,7 @@
                                                                cancelButtonTitle:@"取消"
                                                                otherButtonTitles:@"确定", nil];
                         [alertVC show];
+                        
                     }else{
                         UIAlertView *alertVC = [[UIAlertView alloc]initWithTitle:@"提示" message:@"用户或密码错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                         [alertVC show];
