@@ -30,23 +30,34 @@
     self.title  = @"考勤查询";
     self.userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userKey=[self.userDefaults objectForKey:@"KEY"];
-    
-    [AMSystemManager interfaceAttendanceReportExactToDay:userKey serachDate:@"4" complation:^(id obj) {
-        if ([@"1" isEqualToString:[obj objectForKey:@"result"]]) {
-            NSString *BBBB=@"START";
-            NSLog(@"%@",BBBB);
-            NSLog(@"%@",obj);
-            [self initViews:obj[@"list"]];
-//            [self initViews:[obj objectForKey:@"list"]];
+    VRGCalendarView *calendar = [[VRGCalendarView alloc]init];
+    calendar.delegate = self;
+    calendar.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.width);
+    calendar.layer.borderWidth=1.0;
+    calendar.layer.borderColor=[UIColor greenColor].CGColor;
+    [self.view addSubview:calendar];
+    [AMSystemManager interfaceAttendanceReportExactToMonth:userKey serachTime:@"201411" complation:^(id obj) {
+//        if ([[obj objectForKey:@"result"] isEqualToString:@"1"]) {
+            NSLog(@"http request seccess:%@",[obj objectForKey:@"list"]);
+        if ([[obj objectForKey:@"list"] count]>0) {
+            [calendar markDates:[obj objectForKey:@"list"]];
+            [calendar setNeedsDisplay];
         }
+        else{
+            [calendar markDates:[self libRandDays]];
+        }
+//        [self initViews:[obj objectForKey:@"list"]];
+//        }
     }];
-    
     // Do any additional setup after loading the view.
 }
 
 -(void)initViews:(NSArray *)array{
     
     VRGCalendarView *calendar = [[VRGCalendarView alloc]init];
+    if (array.count>0) {
+        [calendar markDates:array];
+    }
     calendar.delegate = self;
     calendar.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.width);
     [self.view addSubview:calendar];
@@ -70,8 +81,9 @@
         
         if (![randomArr containsObject:randomString]) {
             NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-            [dict setObject:[self shortinformation] forKey:@"info"];
-            [dict setObject:randomString forKey:@"day"];
+            [dict setObject:[self infoNOR_OR_EXC_INFO] forKey:@"NOR_OR_EXC_INFO"];
+            [dict setObject:[self shortinformationNOR_OR_EXC] forKey:@"NOR_OR_EXC"];
+            [dict setObject:randomString forKey:@"date"];
             [randomArr addObject:dict];
 //            [randomArr addObject:randomString];
         }
@@ -82,18 +94,36 @@
     } while (randomArr.count != 10);
     return randomArr;
 }
--(NSString *)shortinformation{
-    NSString *str=@"正常";
+-(NSString *)shortinformationNOR_OR_EXC{
+    NSString *str=@"0";
     int random=arc4random()%3;
     switch (random) {
         case 0:
-            str=@"请假";
+            str=@"-1";
             break;
         case 1:{
-            str=@"旷班";
+            str=@"0";
         }break;
         case 2:{
-            str=@"加班";
+            str=@"1";
+        }break;
+        default:
+            break;
+    }
+    return str;
+}
+-(NSString *)infoNOR_OR_EXC_INFO{
+    NSString *str=@"";
+    int random=arc4random()%3;
+    switch (random) {
+        case 0:
+            str=@"请假一天";
+            break;
+        case 1:{
+            str=@"不好意思，今天有事，没空";
+        }break;
+        case 2:{
+            str=@"";
         }break;
         default:
             break;

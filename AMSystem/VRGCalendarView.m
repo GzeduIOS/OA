@@ -49,6 +49,7 @@
 //NSArray can either contain NSDate objects or NSNumber objects with an int of the day.
 
 -(void)markDates:(NSArray *)dates {
+    
     self.markedDates = [NSArray arrayWithArray:dates];
 //    NSMutableArray *colors = [[NSMutableArray alloc] init];
 //
@@ -82,17 +83,50 @@
     } while (randomArr.count != 10);
     return randomArr;
 }
--(BOOL)permitMarkDatasSetRedColor:(NSString *)day{
+-(NSDictionary *)permitMarkDatasSetRedColor:(NSString *)day{
 //    self.markedDates=[self libRandDays];
     //@[@"3",@"5",@"6",@"12",@"13",@"14"]
+    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+    NSString *temp_string=day;
+    if (temp_string.length==1) {
+        temp_string=[NSString stringWithFormat:@"0%@",temp_string];
+    }
     for (int i=0; i<self.markedDates.count; i++) {
-        if ([[[self.markedDates objectAtIndex:i] objectForKey:@"day"] isEqualToString:day]) {
+        if ([self daysIsEqualForSourceDay:[[self.markedDates objectAtIndex:i] objectForKey:@"date"] andNowUseDay:day]) {
+            [dict setObject:@"1" forKey:@"result"];
+            [dict setObject:[NSString stringWithFormat:@"%d",i] forKey:@"index"];
+            return dict;
+        }
+//        NSString *day_string=[[self.markedDates objectAtIndex:i] objectForKey:@"date"];
+//        if (day_string.length!=2&&day_string.length==10) {
+//            day_string=[day_string substringFromIndex:5];
+//        }
+//        
+//        if ([day_string isEqualToString:temp_string]) {
+//            return YES;
+//        }
+//        if ([[[self.markedDates objectAtIndex:i] objectForKey:@"day"] isEqualToString:day]) {
+//            return YES;
+//        }
+    }
+    [dict setObject:@"0" forKey:@"result"];
+    return dict;
+}
+
+-(BOOL)daysIsEqualForSourceDay:(NSString *)dayString andNowUseDay:(NSString *)day{
+    if (dayString.length==10) {
+        dayString=[dayString substringFromIndex:8];
+        if (day.length!=2) {
+            if (day.length<2) {
+                day=[NSString stringWithFormat:@"0%@",day];
+            }
+        }
+        if ([dayString isEqualToString:day]) {
             return YES;
         }
     }
     return NO;
 }
-
 //NSArray can either contain NSDate objects or NSNumber objects with an int of the day.
 -(void)markDates:(NSArray *)dates withColors:(NSArray *)colors {
     self.markedDates = dates;
@@ -309,9 +343,12 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMMM yyyy"];
     NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
-    [formatter2 setDateFormat:@"yyyyMM"];
-    NSString *date = [formatter2 stringFromDate:self.currentMonth];
-    labelCurrentMonth.text = [formatter stringFromDate:self.currentMonth];
+    
+    [formatter2 setDateFormat:@"yyyy  MM"];
+    NSString *date1 = [formatter2 stringFromDate:self.currentMonth];
+    //第一次进来如果字符串里有中文，文本不显示内容
+    labelCurrentMonth.text=date1;
+    NSLog(@"labelCurrentMonth.text:%@",labelCurrentMonth.text);
     [labelCurrentMonth sizeToFit];
     labelCurrentMonth.frameX = roundf(self.frame.size.width/2 - labelCurrentMonth.frameWidth/2);
     labelCurrentMonth.frameY = 10;
@@ -332,15 +369,26 @@
     int ymargin = 18;
     
     //Arrow Left
-    CGContextBeginPath(context);
-    CGContextMoveToPoint(context, xmargin+arrowSize/1.5, ymargin);
-    CGContextAddLineToPoint(context,xmargin+arrowSize/1.5,ymargin+arrowSize);
-    CGContextAddLineToPoint(context,xmargin,ymargin+arrowSize/2);
-    CGContextAddLineToPoint(context,xmargin+arrowSize/1.5, ymargin);
+    NSString* imagePath = [[NSBundle mainBundle] pathForResource:@"rephotograph" ofType:@"png"];
+    UIImage* myImageObj = [[UIImage alloc] initWithContentsOfFile:imagePath];
+    //[myImageObj drawAtPoint:CGPointMake(0, 0)];
+    [myImageObj drawInRect:CGRectMake(xmargin+arrowSize/1.5, ymargin, 20, 20)];
     
-    CGContextSetFillColorWithColor(context, 
-                                   [UIColor blackColor].CGColor);
-    CGContextFillPath(context);
+//    NSString *s = @"我的小狗";
+//    
+//    [s drawAtPoint:CGPointMake(100, 0) withFont:[UIFont systemFontOfSize:34.0]];
+    
+    
+    
+//    CGContextBeginPath(context);
+//    CGContextMoveToPoint(context, xmargin+arrowSize/1.5, ymargin);
+//    CGContextAddLineToPoint(context,xmargin+arrowSize/1.5,ymargin+arrowSize);
+//    CGContextAddLineToPoint(context,xmargin,ymargin+arrowSize/2);
+//    CGContextAddLineToPoint(context,xmargin+arrowSize/1.5, ymargin);
+//    
+//    CGContextSetFillColorWithColor(context, 
+//                                   [UIColor blackColor].CGColor);
+//    CGContextFillPath(context);
     
     //Arrow right
     CGContextBeginPath(context);
@@ -365,7 +413,7 @@
     for (int i =0; i<[weekdays count]; i++) {
         NSString *weekdayValue = (NSString *)[weekdays objectAtIndex:i];
         UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:12];
-        [weekdayValue drawInRect:CGRectMake(i*(kVRGCalendarViewDayWidth+2), 40, kVRGCalendarViewDayWidth+2, 20) withFont:font lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+        [weekdayValue drawInRect:CGRectMake(i*(kVRGCalendarViewDayWidth+2), 40, kVRGCalendarViewDayWidth+2, 20) withFont:font lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentCenter];
     }
     
     int numRows = [self numRows];
@@ -495,7 +543,7 @@
 //            CGContextSetFillColorWithColor(context,
 //                                           [UIColor colorWithHexString:hex].CGColor);
             CGContextSetFillColorWithColor(context,
-                                           [UIColor whiteColor].CGColor);
+                                           [UIColor greenColor].CGColor);
 
         }
         
@@ -507,8 +555,8 @@
             if (i>=(firstWeekDay+currentMonthNumDays)) {//下月
             }
             else{//本月
-                
-                if ([self permitMarkDatasSetRedColor:date]) {
+                NSDictionary *day_infomationDict=[self permitMarkDatasSetRedColor:date];
+                if ([[day_infomationDict objectForKey:@"result"] isEqualToString:@"1"]) {
                     CGContextSetLineWidth(context, 2.0);
                     CGRect rectangleGrid = CGRectMake(targetX,targetY,kVRGCalendarViewDayWidth+2,kVRGCalendarViewDayHeight+2);
                     CGContextAddRect(context, rectangleGrid);
@@ -519,12 +567,13 @@
                     CGContextSetLineWidth(context, 1.0);
                     CGContextSetRGBFillColor(context, 0.5, 0.5f, 0.5f, 1.0f);
                     UIFont *charFont=[UIFont systemFontOfSize:10.0f];
-                    NSString *drwaString=@"";
-                    for (int i=0; i<self.markedDates.count; i++) {
-                        if ([[[self.markedDates objectAtIndex:i] objectForKey:@"day"] isEqualToString:date]) {
-                            drwaString=[[self.markedDates objectAtIndex:i] objectForKey:@"info"];
-                        }
-                    }
+                    NSString *drwaString=[[self.markedDates objectAtIndex:[[day_infomationDict objectForKey:@"index"]integerValue]] objectForKey:@"NOR_OR_EXC"];
+                    
+//                    for (int i=0; i<self.markedDates.count; i++) {
+//                        if ([[[self.markedDates objectAtIndex:i] objectForKey:@"date"] isEqualToString:date]) {
+//                            drwaString=[[self.markedDates objectAtIndex:i] objectForKey:@"NOR_OR_EXC"];
+//                        }
+//                    }
                     
                     [drwaString drawInRect:rectangleGrid withAttributes:@{charFont:NSFontAttributeName}];
                 }
@@ -598,9 +647,14 @@
         [date drawInRect:CGRectMake(targetX+2, targetY+10, kVRGCalendarViewDayWidth, kVRGCalendarViewDayHeight) withFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
     }
     
-    //    CGContextClosePath(context);
-    
-    
+    CGContextClosePath(context);
+//    CGFloat view_height=self.frame.size.height;
+//    CGContextSetRGBStrokeColor(context, 0.9, 0.0, 0.0, 1.0);//线条颜色
+//    
+//    CGContextSetLineWidth(context, 2.0);
+//    CGContextAddRect(context, CGRectMake(1, 0, 318, view_height-1));
+//    CGContextStrokePath(context);
+
     //Draw markings
     if (!self.markedDates || isSelectedDatePreviousMonth || isSelectedDateNextMonth) return;
     
@@ -646,7 +700,7 @@
 
 #pragma mark - Draw image for animation
 -(UIImage *)drawCurrentState {
-    float targetHeight = kVRGCalendarViewTopBarHeight + [self numRows]*(kVRGCalendarViewDayHeight+2)+1;
+    float targetHeight = kVRGCalendarViewTopBarHeight + [self numRows]*(kVRGCalendarViewDayHeight+2)+7;
     
     UIGraphicsBeginImageContext(CGSizeMake(kVRGCalendarViewWidth, targetHeight-kVRGCalendarViewTopBarHeight));
     CGContextRef c = UIGraphicsGetCurrentContext();
@@ -670,7 +724,7 @@
         labelCurrentMonth.backgroundColor=[UIColor whiteColor];
         labelCurrentMonth.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:17];
         labelCurrentMonth.textColor = [UIColor colorWithHexString:@"0x383838"];//#FFFFFF
-        labelCurrentMonth.textAlignment = UITextAlignmentCenter;
+        labelCurrentMonth.textAlignment = NSTextAlignmentCenter;
         
         [self performSelector:@selector(reset) withObject:nil afterDelay:0.1]; //so delegate can be set after init and still get called on init
         //        [self reset];
