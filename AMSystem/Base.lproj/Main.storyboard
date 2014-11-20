@@ -14,8 +14,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view tag="1" contentMode="scaleToFill" id="4qs-5e-yXe">
-                                <rect key="frame" x="11" y="227" width="298" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="11" y="244" width="298" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="请输入用户名" minimumFontSize="17" id="zK3-PX-pbT">
                                         <rect key="frame" x="47" y="7" width="250" height="30"/>
@@ -30,8 +30,8 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view tag="2" contentMode="scaleToFill" id="4TO-EA-oq5">
-                                <rect key="frame" x="11" y="272" width="298" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="11" y="289" width="298" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pass.png" id="VMQ-lr-LsA">
                                         <rect key="frame" x="8" y="9" width="25" height="25"/>
@@ -47,8 +47,8 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zQi-3G-0um">
-                                <rect key="frame" x="16" y="379" width="288" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="16" y="351" width="288" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <state key="normal" title="登录" backgroundImage="btn.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,7 +59,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo@3x.png" id="nvh-IM-3va">
-                                <rect key="frame" x="72" y="64" width="176" height="172"/>
+                                <rect key="frame" x="72" y="70" width="176" height="176"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -80,7 +80,7 @@
             <objects>
                 <viewController storyboardIdentifier="Identifier" id="Crn-2x-fUg" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l1S-FA-YRt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg2208.png" id="W4l-IK-XuQ">
@@ -88,12 +88,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="XLp-Rt-ydn">
-                                <rect key="frame" x="10" y="86" width="145" height="130"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="11" y="69" width="147" height="132"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
                                 </accessibility>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="-6" maxX="0.0" maxY="6"/>
                                 <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="考勤签到" image="01.png">
@@ -104,22 +105,8 @@
                                     <segue destination="pOV-PT-yiq" kind="push" identifier="SignatureSegue" id="MQa-4d-w7L"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="LMH-yz-pEM">
-                                <rect key="frame" x="165" y="86" width="145" height="130"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="请假管理" image="02.png">
-                                    <color key="titleColor" red="0.050980392159999999" green="0.4549019608" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="IrJ-01-F7X" kind="push" identifier="LeaveSegue" id="fJe-Rc-hZU"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="df6-Wt-419">
-                                <rect key="frame" x="10" y="224" width="145" height="130"/>
+                                <rect key="frame" x="11" y="206" width="147" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="0.0"/>
@@ -133,8 +120,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="U0M-rI-3fU">
-                                <rect key="frame" x="163" y="224" width="145" height="130"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="164" y="206" width="147" height="132"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="-84"/>
                                 <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
@@ -147,7 +134,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="Rhs-dP-Ve5">
-                                <rect key="frame" x="10" y="363" width="145" height="130"/>
+                                <rect key="frame" x="11" y="343" width="147" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="titleEdgeInsets" minX="-33" minY="90" maxX="0.0" maxY="0.0"/>
@@ -161,8 +148,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="gKD-IZ-HOk">
-                                <rect key="frame" x="163" y="363" width="145" height="130"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="164" y="343" width="147" height="132"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
@@ -174,10 +161,25 @@
                                     <segue destination="IrJ-01-F7X" kind="push" identifier="LeaveApprovalSegue" id="Gzy-cw-yuD"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="LMH-yz-pEM">
+                                <rect key="frame" x="164" y="69" width="147" height="132"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="-6" maxX="0.0" maxY="6"/>
+                                <inset key="titleEdgeInsets" minX="-15" minY="90" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="46" minY="28" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="请假管理" image="02.png">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.4549019608" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="IrJ-01-F7X" kind="push" identifier="LeaveSegue" id="fJe-Rc-hZU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90588241820000004" green="0.92549026010000002" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="Btn" destination="XLp-Rt-ydn" id="b0K-8V-agN"/>
                         <outlet property="Btn2" destination="LMH-yz-pEM" id="h5C-Za-O1A"/>
@@ -196,7 +198,7 @@
             <objects>
                 <viewController id="IrJ-01-F7X" customClass="LeaveAndApproveViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LAn-KY-weS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="ip0-27-JXo">
@@ -534,7 +536,7 @@
             <objects>
                 <viewController storyboardIdentifier="AReportIdentity" id="git-bC-6Mt" customClass="AReportViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uqX-Rf-zC9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="A2H-Z4-sxw">
@@ -653,7 +655,7 @@
             <objects>
                 <viewController storyboardIdentifier="AQuery Identity" id="L46-TZ-iiF" customClass="AQueryViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p86-fk-PT0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1086,7 +1088,7 @@
             <objects>
                 <viewController id="89E-H4-48H" customClass="SignatureApprovalViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vkV-sA-WjR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="Iow-tA-QJn">
