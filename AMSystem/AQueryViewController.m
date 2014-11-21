@@ -33,8 +33,6 @@
     VRGCalendarView *calendar = [[VRGCalendarView alloc]init];
     calendar.delegate = self;
     calendar.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.width);
-    calendar.layer.borderWidth=1.0;
-    calendar.layer.borderColor=[UIColor greenColor].CGColor;
     [self.view addSubview:calendar];
     [AMSystemManager interfaceAttendanceReportExactToMonth:userKey serachTime:@"201411" complation:^(id obj) {
 //        if ([[obj objectForKey:@"result"] isEqualToString:@"1"]) {

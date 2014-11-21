@@ -93,6 +93,7 @@
     }
     for (int i=0; i<self.markedDates.count; i++) {
         if ([self daysIsEqualForSourceDay:[[self.markedDates objectAtIndex:i] objectForKey:@"date"] andNowUseDay:day]) {
+            dict=[NSMutableDictionary dictionaryWithDictionary:[self.markedDates objectAtIndex:i]];
             [dict setObject:@"1" forKey:@"result"];
             [dict setObject:[NSString stringWithFormat:@"%d",i] forKey:@"index"];
             return dict;
@@ -517,8 +518,9 @@
             
 //            CGContextSetFillColorWithColor(context, 
 //                                           [UIColor colorWithHexString:hex].CGColor);
-            CGContextSetFillColorWithColor(context,
-                                           [UIColor grayColor].CGColor);
+            CGContextSetRGBFillColor(context, 0.8, 0.8, 0.8, 1.0);
+//            CGContextSetFillColorWithColor(context,
+//                                           [UIColor grayColor].CGColor);
 
         } else if (i>=(firstWeekDay+currentMonthNumDays)) { //next month
             targetDate = (i+1) - (firstWeekDay+currentMonthNumDays);
@@ -534,8 +536,9 @@
 //            NSString *hex = (isSelectedDatePreviousMonth || isSelectedDateNextMonth) ? @"0xaaaaaa" : @"0x383838";
 //            CGContextSetFillColorWithColor(context,
 //                                           [UIColor colorWithHexString:hex].CGColor);
-            CGContextSetFillColorWithColor(context,
-                                           [UIColor greenColor].CGColor);
+            CGContextSetRGBFillColor(context, 0.8, 0.8, 0.8, 1.0);
+//            CGContextSetFillColorWithColor(context,
+//                                           [UIColor greenColor].CGColor);
 
         }
         
@@ -546,51 +549,65 @@
         if ([date integerValue]<=i+1) {
             if (i>=(firstWeekDay+currentMonthNumDays)) {//下月
             }
-            else{//本月
+            else{
+                //本月
                 NSDictionary *day_infomationDict=[self permitMarkDatasSetRedColor:date];
-                if ([[day_infomationDict objectForKey:@"result"] isEqualToString:@"1"]) {
+                if (todayBlock==i) {//当天的
                     CGContextSetLineWidth(context, 2.0);
                     CGRect rectangleGrid = CGRectMake(targetX,targetY,kVRGCalendarViewDayWidth+2,kVRGCalendarViewDayHeight+2);
                     CGContextAddRect(context, rectangleGrid);
-                    CGContextSetRGBStrokeColor(context, 0.99, 0.22, 0.22, 1.0);
-                    CGContextStrokePath(context);
-                    CGContextSetFillColorWithColor(context, [UIColor brownColor].CGColor);
+                    //绿色边框
+//                    CGContextSetRGBStrokeColor(context, 0.3, 0.72, 0.3, 1.0);
+//                    CGContextStrokePath(context);
+                    CGContextSetRGBFillColor(context, 38/256.0, 109/256.0, 191/256.0, 1.0f);
+                    CGContextFillRect(context, rectangleGrid);
+//                    CGContextSetFillColorWithColor(context, [UIColor yellowColor].CGColor);//当日
                     CGContextFillPath(context);
-                    CGContextSetLineWidth(context, 1.0);
-                    CGContextSetRGBFillColor(context, 0.5, 0.5f, 0.5f, 1.0f);
-                    UIFont *charFont=[UIFont systemFontOfSize:10.0f];
-                    NSString *drwaString=[[self.markedDates objectAtIndex:[[day_infomationDict objectForKey:@"index"]integerValue]] objectForKey:@"NOR_OR_EXC"];
                     
-//                    for (int i=0; i<self.markedDates.count; i++) {
-//                        if ([[[self.markedDates objectAtIndex:i] objectForKey:@"date"] isEqualToString:date]) {
-//                            drwaString=[[self.markedDates objectAtIndex:i] objectForKey:@"NOR_OR_EXC"];
-//                        }
-//                    }
-                    
-                    [drwaString drawInRect:rectangleGrid withAttributes:@{charFont:NSFontAttributeName}];
+                    CGContextSetFillColorWithColor(context,
+                                                   [UIColor whiteColor].CGColor);
                 }
+                
                 else if (selectedDate && i==selectedDateBlock) {//选中的
                     
                     CGContextSetLineWidth(context, 2.0);
                     CGRect rectangleGrid = CGRectMake(targetX,targetY,kVRGCalendarViewDayWidth+2,kVRGCalendarViewDayHeight+2);
                     CGContextAddRect(context, rectangleGrid);
-                    //77;184;77===
+                    //77;184;77===绿色边框
                     CGContextSetRGBStrokeColor(context, 0.3, 0.72, 0.3, 1.0);
                     CGContextStrokePath(context);
                     CGContextFillPath(context);
                     CGContextSetFillColorWithColor(context,
                                                    [UIColor blueColor].CGColor);
-                } else if (todayBlock==i) {//当天的
+                }
+                else if ([[day_infomationDict objectForKey:@"NOR_OR_EXC"] isEqualToString:@"-1"]) {//非正常的
                     CGContextSetLineWidth(context, 2.0);
                     CGRect rectangleGrid = CGRectMake(targetX,targetY,kVRGCalendarViewDayWidth+2,kVRGCalendarViewDayHeight+2);
                     CGContextAddRect(context, rectangleGrid);
-                    CGContextSetRGBStrokeColor(context, 0.3, 0.72, 0.3, 1.0);
-                    CGContextStrokePath(context);
-                    CGContextSetFillColorWithColor(context, [UIColor yellowColor].CGColor);//当日
-                    CGContextFillPath(context);
+                    //红色
+//                    CGContextSetRGBStrokeColor(context, 0.99, 0.22, 0.22, 1.0);
+//                    CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
+//                    CGContextStrokePath(context);
+                    //255,153,50
+                    CGContextSetRGBFillColor(context, 0.99, 153.0/256, 50.0/256, 1.0);
+                    CGContextFillRect(context, rectangleGrid);
                     
-                    CGContextSetFillColorWithColor(context, 
-                                                   [UIColor redColor].CGColor);
+                    
+                    CGContextSetLineWidth(context, 1.0);
+                    //蓝色
+                    CGContextSetRGBFillColor(context, 0.2, 0.2f, 0.99f, 1.0f);
+                    UIFont *charFont=[UIFont systemFontOfSize:10.0f];
+                    NSString *drwaString=[[self.markedDates objectAtIndex:[[day_infomationDict objectForKey:@"index"]integerValue]] objectForKey:@"NOR_OR_EXC"];
+                    
+                    //                    for (int i=0; i<self.markedDates.count; i++) {
+                    //                        if ([[[self.markedDates objectAtIndex:i] objectForKey:@"date"] isEqualToString:date]) {
+                    //                            drwaString=[[self.markedDates objectAtIndex:i] objectForKey:@"NOR_OR_EXC"];
+                    //                        }
+                    //                    }
+                    
+                    [drwaString drawInRect:rectangleGrid withAttributes:@{charFont:NSFontAttributeName,[UIColor orangeColor]:NSForegroundColorAttributeName}];
+                    CGContextFillPath(context);
+                    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
                 }
                 else{
                     CGRect rectangleGrid = CGRectMake(targetX,targetY,kVRGCalendarViewDayWidth+2,kVRGCalendarViewDayHeight+2);
@@ -600,7 +617,8 @@
                     
                     CGContextStrokePath(context);
                     CGContextFillPath(context);
-                    CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
+                    CGContextSetRGBFillColor(context, 0.3, 0.3, 0.3, 1.0);
+//                    CGContextSetFillColorWithColor(context, [UIColor cyanColor].CGColor);
                     
                 }
                 
@@ -646,6 +664,10 @@
 //    CGContextSetLineWidth(context, 2.0);
 //    CGContextAddRect(context, CGRectMake(1, 0, 318, view_height-1));
 //    CGContextStrokePath(context);
+    NSDictionary *strokeAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:20.0F], NSFontAttributeName, [UIColor colorWithRed:50/256.0 green:50/256.0 blue:50/256.0 alpha:1.0], NSStrokeColorAttributeName, @3.0, NSStrokeWidthAttributeName, nil];
+    CGFloat hhhhh=(numBlocks/7+1)*(kVRGCalendarViewDayHeight+2)+kVRGCalendarViewTopBarHeight;
+    NSString *back_red_string_white=@"红色背景的日期为有异常情况";
+    [back_red_string_white drawInRect:CGRectMake(20, hhhhh, self.frame.size.width-40, 100) withAttributes:strokeAttributes];
     UIImage *new_image_left=[self image:[UIImage imageNamed:@"attendance3-3.png"] rotation:UIImageOrientationRight];
     CGContextDrawImage(context, CGRectMake(20, 15, 23, 23), new_image_left.CGImage);
     UIImage *new_image_right=[self image:[UIImage imageNamed:@"attendance3-3.png"] rotation:UIImageOrientationLeft];
