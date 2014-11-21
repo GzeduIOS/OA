@@ -363,23 +363,15 @@
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextFillPath(context);
     
-    //Arrows
-    int arrowSize = 12;
-    int xmargin = 20;
-    int ymargin = 18;
-    
-    //Arrow Left
-    NSString* imagePath = [[NSBundle mainBundle] pathForResource:@"rephotograph" ofType:@"png"];
-    UIImage* myImageObj = [[UIImage alloc] initWithContentsOfFile:imagePath];
-    //[myImageObj drawAtPoint:CGPointMake(0, 0)];
-    [myImageObj drawInRect:CGRectMake(xmargin+arrowSize/1.5, ymargin, 20, 20)];
-    
-//    NSString *s = @"我的小狗";
+//    //Arrows
+//    int arrowSize = 12;
+//    int xmargin = 20;
+//    int ymargin = 18;
 //    
-//    [s drawAtPoint:CGPointMake(100, 0) withFont:[UIFont systemFontOfSize:34.0]];
-    
-    
-    
+//    //Arrow Left
+////    UIImage *newImage=[self image:[UIImage imageNamed:@"rephotograph.png"] rotation:UIImageOrientationLeft];
+////    CGContextDrawImage(context, CGRectMake(20, 20, 20, 20), newImage.CGImage);
+//
 //    CGContextBeginPath(context);
 //    CGContextMoveToPoint(context, xmargin+arrowSize/1.5, ymargin);
 //    CGContextAddLineToPoint(context,xmargin+arrowSize/1.5,ymargin+arrowSize);
@@ -389,17 +381,17 @@
 //    CGContextSetFillColorWithColor(context, 
 //                                   [UIColor blackColor].CGColor);
 //    CGContextFillPath(context);
-    
-    //Arrow right
-    CGContextBeginPath(context);
-    CGContextMoveToPoint(context, self.frame.size.width-(xmargin+arrowSize/1.5), ymargin);
-    CGContextAddLineToPoint(context,self.frame.size.width-xmargin,ymargin+arrowSize/2);
-    CGContextAddLineToPoint(context,self.frame.size.width-(xmargin+arrowSize/1.5),ymargin+arrowSize);
-    CGContextAddLineToPoint(context,self.frame.size.width-(xmargin+arrowSize/1.5), ymargin);
-    
-    CGContextSetFillColorWithColor(context, 
-                                   [UIColor blackColor].CGColor);
-    CGContextFillPath(context);
+//    
+//    //Arrow right
+//    CGContextBeginPath(context);
+//    CGContextMoveToPoint(context, self.frame.size.width-(xmargin+arrowSize/1.5), ymargin);
+//    CGContextAddLineToPoint(context,self.frame.size.width-xmargin,ymargin+arrowSize/2);
+//    CGContextAddLineToPoint(context,self.frame.size.width-(xmargin+arrowSize/1.5),ymargin+arrowSize);
+//    CGContextAddLineToPoint(context,self.frame.size.width-(xmargin+arrowSize/1.5), ymargin);
+//    
+//    CGContextSetFillColorWithColor(context, 
+//                                   [UIColor blackColor].CGColor);
+//    CGContextFillPath(context);
     
     //Weekdays
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -407,9 +399,9 @@
     //always assume gregorian with monday first
     NSMutableArray *weekdays = [[NSMutableArray alloc] initWithArray:[dateFormatter shortWeekdaySymbols]];
     [weekdays moveObjectFromIndex:0 toIndex:6];
-    
+    //55;107;187
     CGContextSetFillColorWithColor(context, 
-                                   [UIColor colorWithHexString:@"FF0000"].CGColor);
+                                   [UIColor colorWithHexString:@"376AAA"].CGColor);
     for (int i =0; i<[weekdays count]; i++) {
         NSString *weekdayValue = (NSString *)[weekdays objectAtIndex:i];
         UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:12];
@@ -654,7 +646,10 @@
 //    CGContextSetLineWidth(context, 2.0);
 //    CGContextAddRect(context, CGRectMake(1, 0, 318, view_height-1));
 //    CGContextStrokePath(context);
-
+    UIImage *new_image_left=[self image:[UIImage imageNamed:@"attendance3-3.png"] rotation:UIImageOrientationRight];
+    CGContextDrawImage(context, CGRectMake(20, 15, 23, 23), new_image_left.CGImage);
+    UIImage *new_image_right=[self image:[UIImage imageNamed:@"attendance3-3.png"] rotation:UIImageOrientationLeft];
+    CGContextDrawImage(context, CGRectMake(280, 15, 23, 23), new_image_right.CGImage);
     //Draw markings
     if (!self.markedDates || isSelectedDatePreviousMonth || isSelectedDateNextMonth) return;
     
@@ -741,5 +736,62 @@
     self.markedDates=nil;
     self.markedColors=nil;
     
+}
+
+-(UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation
+{
+    long double rotate = 0.0;
+    CGRect rect;
+    float translateX = 0;
+    float translateY = 0;
+    float scaleX = 1.0;
+    float scaleY = 1.0;
+    
+    switch (orientation) {
+        case UIImageOrientationLeft:
+            rotate = M_PI_2;
+            rect = CGRectMake(0, 0, image.size.height, image.size.width);
+            translateX = 0;
+            translateY = -rect.size.width;
+            scaleY = rect.size.width/rect.size.height;
+            scaleX = rect.size.height/rect.size.width;
+            break;
+        case UIImageOrientationRight:
+            rotate = 3 * M_PI_2;
+            rect = CGRectMake(0, 0, image.size.height, image.size.width);
+            translateX = -rect.size.height;
+            translateY = 0;
+            scaleY = rect.size.width/rect.size.height;
+            scaleX = rect.size.height/rect.size.width;
+            break;
+        case UIImageOrientationDown:
+            rotate = M_PI;
+            rect = CGRectMake(0, 0, image.size.width, image.size.height);
+            translateX = -rect.size.width;
+            translateY = -rect.size.height;
+            break;
+        default:
+            rotate = 0.0;
+            rect = CGRectMake(0, 0, image.size.width, image.size.height);
+            translateX = 0;
+            translateY = 0;
+            break;
+    }
+    NSLog(@"\nrotate:%Lf\n translateX:%f\ntranslateY:%f",rotate,translateX,translateY);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //做CTM变换
+    CGContextTranslateCTM(context, 0.0, rect.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextRotateCTM(context, rotate);
+    CGContextTranslateCTM(context, translateX, translateY);
+    
+    CGContextScaleCTM(context, scaleX, scaleY);
+    //绘制图片
+    CGContextDrawImage(context, CGRectMake(0, 0, rect.size.width, rect.size.height), image.CGImage);
+    
+    UIImage *newPic = UIGraphicsGetImageFromCurrentImageContext();
+    
+    return newPic;
 }
 @end
