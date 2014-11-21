@@ -15,7 +15,7 @@
     // Initialization code
 }
 -(void)layoutSubviews{
-    // [super layoutSubviews];
+    [super layoutSubviews];//快速显示界面
     self.name.text = self.per.AReportname;
     self.right.text = self.per.normal_num;
     self.unusual.text = self.per.exception_num;

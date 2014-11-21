@@ -28,6 +28,8 @@
     self.myPassage.text = [userDefaults stringForKey:@"passage"];
     self.myName.text = [userDefaults stringForKey:@"name"];
     self.loginBtn.layer.cornerRadius = 5;
+    self.myName.delegate  = self;
+    self.myPassage.delegate = self;
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -63,23 +65,36 @@
     loginBtn.layer.cornerRadius = 5;
 }
 
-//点击Enter的时候隐藏软键盘
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self.myName resignFirstResponder];
-    [self.myPassage resignFirstResponder];
-    return YES;
-}
-//点击取消（Cancel）或那个小差号的时候隐藏。注意这里如return YES则无法隐藏
--(BOOL)textFieldShouldClear:(UITextField *)textField{
-    [self.myName resignFirstResponder];
-    [self.myPassage resignFirstResponder];
-    return NO;
-}
+
 //点击View的其他区域隐藏软键盘。
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.myName resignFirstResponder];
     [self.myPassage resignFirstResponder];
 }
+
+//开始编辑输入框的时候，软键盘出现，执行此事件
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-70);
+    NSTimeInterval animationDuration = 0.30f;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView commitAnimations];
+}
+
+//当用户按下return键或者按回车键，keyboard消失
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+//输入框编辑完成以后，将视图恢复到原始状态
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+}
+
 
 - (IBAction)LoginBtn:(id)sender {
     //存储用户名和密码到本地
@@ -137,6 +152,7 @@
                                                                cancelButtonTitle:@"取消"
                                                                otherButtonTitles:@"确定", nil];
                         [alertVC show];
+                        
                     }else{
                         UIAlertView *alertVC = [[UIAlertView alloc]initWithTitle:@"提示" message:@"用户或密码错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                         [alertVC show];

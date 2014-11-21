@@ -80,6 +80,9 @@
 		39C3C43919B99FA0000BE1B2 /* AQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C3C43819B99FA0000BE1B2 /* AQueryViewController.m */; };
 		39C3C43C19B99FC3000BE1B2 /* AReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C3C43B19B99FC3000BE1B2 /* AReportViewController.m */; };
 		39C3C44119B9B5A3000BE1B2 /* AMSystemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C3C44019B9B5A3000BE1B2 /* AMSystemManager.m */; };
+		39D593841A1D7F600067D772 /* drop-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D593811A1D7F600067D772 /* drop-down.png */; };
+		39D593851A1D7F600067D772 /* drop-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D593821A1D7F600067D772 /* drop-down@2x.png */; };
+		39D593861A1D7F600067D772 /* drop-down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D593831A1D7F600067D772 /* drop-down@3x.png */; };
 		CE29CD2D1A11DDE00030C202 /* VORingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29CD251A11DDE00030C202 /* VORingIndicator.m */; };
 		CE29CD2E1A11DDE00030C202 /* VORingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29CD271A11DDE00030C202 /* VORingProgressView.m */; };
 		CE29CD3D1A11DEA30030C202 /* UIScrollView+VORefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29CD3A1A11DEA30030C202 /* UIScrollView+VORefresh.m */; };
@@ -271,6 +274,9 @@
 		39C3C43B19B99FC3000BE1B2 /* AReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AReportViewController.m; sourceTree = "<group>"; };
 		39C3C43F19B9B5A3000BE1B2 /* AMSystemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSystemManager.h; sourceTree = "<group>"; };
 		39C3C44019B9B5A3000BE1B2 /* AMSystemManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSystemManager.m; sourceTree = "<group>"; };
+		39D593811A1D7F600067D772 /* drop-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drop-down.png"; sourceTree = "<group>"; };
+		39D593821A1D7F600067D772 /* drop-down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drop-down@2x.png"; sourceTree = "<group>"; };
+		39D593831A1D7F600067D772 /* drop-down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drop-down@3x.png"; sourceTree = "<group>"; };
 		CE29CD241A11DDE00030C202 /* VORingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VORingIndicator.h; sourceTree = "<group>"; };
 		CE29CD251A11DDE00030C202 /* VORingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VORingIndicator.m; sourceTree = "<group>"; };
 		CE29CD261A11DDE00030C202 /* VORingProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VORingProgressView.h; sourceTree = "<group>"; };
@@ -568,6 +574,16 @@
 			name = resources;
 			sourceTree = "<group>";
 		};
+		39D593801A1D7F220067D772 /* 报表界面 */ = {
+			isa = PBXGroup;
+			children = (
+				39D593811A1D7F600067D772 /* drop-down.png */,
+				39D593821A1D7F600067D772 /* drop-down@2x.png */,
+				39D593831A1D7F600067D772 /* drop-down@3x.png */,
+			);
+			name = "报表界面";
+			sourceTree = "<group>";
+		};
 		CE29CD221A11DDE00030C202 /* PullRefresh Plugin */ = {
 			isa = PBXGroup;
 			children = (
@@ -795,6 +811,7 @@
 		CECF854F1A19CB5C00F1D63F /* beta素材 */ = {
 			isa = PBXGroup;
 			children = (
+				39D593801A1D7F220067D772 /* 报表界面 */,
 				CE7C50821A1B1EED00264D0D /* 签到界面 */,
 				CE7C50591A1AED0100264D0D /* 主界面 */,
 				CE7C505A1A1AED3800264D0D /* 登录界面 */,
@@ -895,6 +912,7 @@
 				397B802719EB81ED006AB51D /* Selected.png in Resources */,
 				CECF85531A19CBB400F1D63F /* logo@2x.png in Resources */,
 				CECF85591A19CC5300F1D63F /* user.png in Resources */,
+				39D593861A1D7F600067D772 /* drop-down@3x.png in Resources */,
 				CE7C509E1A1B1F7D00264D0D /* arrow.png in Resources */,
 				39935A881A1C3D780066C0FC /* Location@3x.png in Resources */,
 				CE7C50791A1AF0B000264D0D /* 04.png in Resources */,
@@ -931,6 +949,7 @@
 				39658D0019D2A6BA00F162E7 /* My2TableViewCell.xib in Resources */,
 				CE7C50A51A1B1F7D00264D0D /* attendance1@2x.png in Resources */,
 				CE7C50861A1B1F6F00264D0D /* rephotograph.png in Resources */,
+				39D593841A1D7F600067D772 /* drop-down.png in Resources */,
 				CE7C507C1A1AF0B000264D0D /* 05.png in Resources */,
 				CE7C50801A1AF0B000264D0D /* 06@2x.png in Resources */,
 				39935A861A1C3D780066C0FC /* Location.png in Resources */,
@@ -942,6 +961,7 @@
 				39C3C42219B95E58000BE1B2 /* form@2x.png in Resources */,
 				CECF85661A19CEC800F1D63F /* btn@2x.png in Resources */,
 				CE7C50AF1A1B1F7D00264D0D /* attendance3-3@3x.png in Resources */,
+				39D593851A1D7F600067D772 /* drop-down@2x.png in Resources */,
 				CECF85551A19CBBB00F1D63F /* logo.png in Resources */,
 				CE7C50B71A1B236C00264D0D /* camera@2x.png in Resources */,
 				CE7C509F1A1B1F7D00264D0D /* arrow@2x.png in Resources */,

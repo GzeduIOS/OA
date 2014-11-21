@@ -121,7 +121,7 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     
     //没审核tableview
     self.NotApproveView = [[UITableView alloc]init];
-    self.NotApproveView.frame = CGRectMake(320*0, 0, 320, self.ScrollView.bounds.size.height-110);
+    self.NotApproveView.frame = CGRectMake(self.ScrollView.frame.size.width*0, 0, self.ScrollView.frame.size.width, self.ScrollView.bounds.size.height-110);
     self.NotApproveView.delegate = self;
     self.NotApproveView.dataSource = self;
     self.NotApproveView.opaque = YES;
@@ -138,7 +138,7 @@ static NSString *FLAG_YET_APPROVE = @"Y";
 -(void)initApproveView{
     //审核tableview
     self.ApproveView = [[UITableView alloc]init];
-    self.ApproveView.frame = CGRectMake(320*1, 0, 320, self.ScrollView.bounds.size.height-110);
+    self.ApproveView.frame = CGRectMake(self.ScrollView.frame.size.width*1, 0, self.ScrollView.frame.size.width, self.ScrollView.bounds.size.height-110);
     self.ApproveView.delegate = self;
     self.ApproveView.dataSource = self;
     self.ApproveView.opaque = YES;
@@ -289,7 +289,7 @@ static NSString *FLAG_YET_APPROVE = @"Y";
     (index == 0 ? [UIColor lightGrayColor] : [UIColor blueColor]);
     
     //scrollView动画
-    [self.ScrollView setContentOffset:CGPointMake(320 * index, 0)];//页面滑动
+    [self.ScrollView setContentOffset:CGPointMake(self.ScrollView.frame.size.width * index, 0)];//页面滑动
     
     [UIView commitAnimations];
     

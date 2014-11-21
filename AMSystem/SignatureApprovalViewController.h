@@ -15,7 +15,6 @@
     NSArray *approvedDataAry;
     
 }
-@property (weak, nonatomic) IBOutlet UILabel *TintLabel;
 @property (strong, nonatomic) IBOutlet UIScrollView *ScrollView;
 @property (weak, nonatomic) IBOutlet UIProgressView *Progress;
 

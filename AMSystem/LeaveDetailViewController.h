@@ -31,5 +31,6 @@
 @property NSString *leaveId;
 @property NSString *userKey;
 @property BOOL isHiddenApproveArea;
+@property BOOL ishiddenNotView;
 
 @end

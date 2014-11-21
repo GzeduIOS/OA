@@ -29,7 +29,7 @@
     _lblApplyTimeSpan.text = _applyTimeSpan;
     
     //普通员工不允许操作
-    if([_userRoleCode isEqualToString:@"A"] || _isHiddenApproveArea){
+    if([_userRoleCode isEqualToString:@"A"] || _isHiddenApproveArea || _ishiddenNotView){
         self.txtMemo.hidden = YES;
         self.btnPass.hidden = YES;
         self.btnReject.hidden = YES;
